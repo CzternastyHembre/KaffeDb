@@ -1,5 +1,6 @@
 import sqlite3
-con = sqlite3.connect("test.db")
+
+con = sqlite3.connect("coffe.db")
 cursor = con.cursor()
 l = [
 "INSERT INTO Person VALUES (1, 'Ola');",
@@ -9,14 +10,3 @@ l = [
 "INSERT INTO Person VALUES (5, 'Nora');",
 "INSERT INTO Person VALUES (6, 'Lukas');",
 ]
-for e in l:   
-    cursor.execute(e)
-    con.commit()
-
-
-cursor.execute("""
-select * from Person where "Pnr" > 4
-"""
-)
-print(cursor.fetchall())
-con.close()
