@@ -2,10 +2,10 @@
 <diagram height="880" made_with_version="1.6" name="Default" width="1420">
 <entity id="0" is_weak="false" name="User" x="155" y="26">
 <attributes>
-<attribute is_hidden="false" is_key="true" name="Email" type="String"/>
-<attribute is_hidden="false" is_key="false" name="First_name" type="String"/>
-<attribute is_hidden="false" is_key="false" name="Last_name" type="String"/>
-<attribute is_hidden="false" is_key="false" name="Password" type="String"/>
+<attribute is_hidden="false" is_key="true" name="user_Email" type="String"/>
+<attribute is_hidden="false" is_key="false" name="first_name" type="String"/>
+<attribute is_hidden="false" is_key="false" name="last_name" type="String"/>
+<attribute is_hidden="false" is_key="false" name="password" type="String"/>
 </attributes>
 </entity>
 <entity id="1" is_weak="false" name="Evaluation" x="138" y="266">
@@ -43,10 +43,10 @@
 <attribute is_hidden="false" is_key="false" name="kg_price_usd" type=""/>
 </attributes>
 </entity>
-<entity id="19" is_weak="false" name="Process" x="631" y="24">
+<entity id="19" is_weak="false" name="Process" x="616" y="11">
 <attributes>
 <attribute is_hidden="false" is_key="true" name="process_ID" type=""/>
-<attribute is_hidden="false" is_key="false" name="name" type=""/>
+<attribute is_hidden="false" is_key="false" name="process_name" type=""/>
 <attribute is_hidden="false" is_key="false" name="description" type=""/>
 </attributes>
 </entity>
@@ -96,7 +96,7 @@
 <attributes/>
 </diamond>
 <line cardinality_string="(0,n)" has_u="false" id="4" is_weak="false" role="" style="0" turned="false">
-<connection connection_side="3" direction="1" object_id="0" relation_point_x="191" relation_point_y="116"/>
+<connection connection_side="3" direction="1" object_id="0" relation_point_x="192" relation_point_y="116"/>
 <connection connection_side="1" direction="1" object_id="2" relation_point_x="193" relation_point_y="179"/>
 </line>
 <line cardinality_string="(1,1)" has_u="false" id="5" is_weak="false" role="" style="0" turned="false">
@@ -132,7 +132,7 @@
 <connection connection_side="0" direction="0" object_id="18" relation_point_x="646" relation_point_y="151"/>
 </line>
 <line cardinality_string="(0,n)" has_u="false" id="35" is_weak="false" role="" style="0" turned="false">
-<connection connection_side="3" direction="1" object_id="19" relation_point_x="668" relation_point_y="99"/>
+<connection connection_side="3" direction="1" object_id="19" relation_point_x="663" relation_point_y="86"/>
 <connection connection_side="1" direction="1" object_id="18" relation_point_x="662" relation_point_y="135"/>
 </line>
 <line cardinality_string="(1,1)" has_u="false" id="37" is_weak="false" role="" style="0" turned="false">
@@ -147,7 +147,7 @@
 <connection connection_side="1" direction="1" object_id="29" relation_point_x="507" relation_point_y="325"/>
 <connection connection_side="3" direction="1" object_id="39" relation_point_x="502" relation_point_y="293"/>
 </line>
-<line cardinality_string="(1,1)" has_u="false" id="41" is_weak="false" role="" style="0" turned="false">
+<line cardinality_string="(1,n)" has_u="false" id="41" is_weak="false" role="" style="0" turned="false">
 <connection connection_side="0" direction="0" object_id="11" relation_point_x="627" relation_point_y="264"/>
 <connection connection_side="2" direction="0" object_id="39" relation_point_x="518" relation_point_y="277"/>
 </line>
