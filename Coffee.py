@@ -10,6 +10,8 @@ Datatypes in sqlite3:
 import tableScripts.coffeeDBBeans as CBeans
 import tableScripts.coffeeDBUser as CUser
 import tableScripts.CoffeFarm as CFarm
+import tableScripts.coffeeDBCountry as Country
+import tableScripts.coffeeDBRegion as Region
 from ENV import DBname
 
 CUser.createDB()
@@ -20,3 +22,10 @@ CBeans.addBeans()
 
 CFarm.createDB()
 CFarm.addFarms()
+"""
+Country.createDB()
+Country.addCountries()
+
+Region.createDB()
+Region.addRegions()
+"""
