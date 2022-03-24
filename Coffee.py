@@ -1,31 +1,28 @@
-"""
-Datatypes in sqlite3:
-    NULL
-    INTEGER - INT
-    REAL - DECIMAL
-    TEXT - STRING
-    BLOB - MP3, MP4...
-"""
-
-import tableScripts.coffeeDBBeans as CBeans
-import tableScripts.coffeeDBUser as CUser
-import tableScripts.CoffeFarm as CFarm
-import tableScripts.coffeeDBCountry as Country
-import tableScripts.coffeeDBRegion as Region
 from ENV import DBname
+import core.createMethods as createMethods
+import core.fetchOnPK as fetchOnPK
 
-CUser.createDB()
-CUser.addUsers()
+methods = {"create": {"user": createMethods.createUser,
+                      "bean": createMethods.createBean},
+           "fetch": {"user": fetchOnPK.fetchUserOnPK,
+                     "bean": fetchOnPK.fetchBeanOnPK}
+           }
 
-CBeans.createDB()
-CBeans.addBeans()
+inp = ""
+while inp.lower() != "e":
+    inp = input("what do you want to do?" +
+                str(methods.keys())+" exit: (e)\n- ")
 
-CFarm.createDB()
-CFarm.addFarms()
-"""
-Country.createDB()
-Country.addCountries()
+    if inp not in methods:
+        print(inp, "is not regonized try againt:\n")
+        continue
 
-Region.createDB()
-Region.addRegions()
-"""
+    inp2 = ""
+    while inp2 != "e":
+        inp2 = input("\nwhat do you want to "+inp+" :" +
+                     str(methods[inp].keys())+"\n- ")
+        if inp2 not in methods[inp]:
+            print(inp, "is not regonized try againt:\n")
+            continue
+        methods[inp][inp2]()  # Den her er sylfrekk da
+        break
