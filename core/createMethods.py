@@ -1,49 +1,59 @@
 import sqlite3
-from ENV import DBname
+
+from numpy import vsplit
+from core.ENV import DBname
+
+
+def createTable(tableName, idName, values):
+    try:
+        tableValues = []
+        for value in values:
+            tableValues.append(input(str(value) + ": "))
+        for el in tableValues:
+            if el.lower() == "e":
+                return
+
+        con = sqlite3.connect(DBname)
+        c = con.cursor()
+
+        valueString = "(" + "?," * len(tableValues)
+        valueString = valueString[:-1] + ")"
+        print(valueString)
+
+        c.execute("Insert into "+tableName+" Values "+valueString, tableValues)
+        c.execute("Select * from "+tableName+" where "+tableName + "." + idName+" == " +
+                  tableValues[0])  # OBS er dette dårlig
+        res = c.fetchone()
+        con.commit()
+        con.close()
+
+        print(res)
+        print("created sucsessfully")
+        return [res]
+    except Exception as e:
+        print(e, "try again\n")
+        createTable(tableName, idName, values)
 
 
 def createUser():
-    try:
-        user_email = input("unique email (e): ")
-        firstName = input("firstName (e): ")
-        lastName = input("lastName (e): ")
-        password = input("password (e): ")
-        if user_email.lower() == "e" or firstName.lower() == "e" or lastName.lower() == "e" or password.lower() == "e":
-            return
-        con = sqlite3.connect(DBname)
-        c = con.cursor()
-
-        c.execute("Insert into User Values (?,?,?,?)",
-                  (user_email, firstName, lastName, password))
-        con.commit()
-        con.close()
-        print("created sucsessfully")
-#        print(c.fetchone("Select * from Bean where beanID == "+bean))
-
-    except Exception as e:
-        print(e, "Try again")
-        createUser()
+    createTable("User", "user_id", ["user_id", "user_email",
+                "firstName", "lastName", "password"])
 
 
 def createBean():
-    try:
-        bean_ID = int(input("bean_ID: "))
-        bean_name = input("bean_name (e): ")
-        species = input("species (e): ")
-        if bean_name.lower() == "e" or species.lower() == "e":
-            return
-        con = sqlite3.connect(DBname)
-        c = con.cursor()
+    createTable("Bean", "bean_id", ["bean_ID", "bean_name", "species"])
 
-        c.execute("Insert into Bean Values (?,?,?)",
-                  (bean_ID, bean_name, species))
-        print("created sucsessfully")
-        c.execute("Select * from Bean where Bean.bean_ID == " +
-                  str(bean_ID))  # OBS er dette dårlig
-        print(c.fetchone())
-        con.commit()
-        con.close()
 
-    except Exception as e:
-        print(e, "Try again")
-        createBean()
+def createFarm():
+    createTable("Farm", "farm_ID",
+                ["farm_id", "farm_name", "country", "region", "height"])
+
+
+def createRoastery():
+    createTable("Roastery", "roastery_ID",
+                ["Roastery_id", "Roastery_name", "region", "country"])
+
+
+def createProcess():
+    createTable("Process", "process_ID",
+                ["Process_id", "Process_name", "description"])

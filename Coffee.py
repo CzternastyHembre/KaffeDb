@@ -1,17 +1,32 @@
-from ENV import DBname
 import core.createMethods as createMethods
 import core.fetchOnPK as fetchOnPK
 
-methods = {"create": {"user": createMethods.createUser,
-                      "bean": createMethods.createBean},
+
+def pp(s):
+    print()
+    for line in s:
+        for el in line:
+            print(el, end=" | ")
+        print()
+    print()
+
+
+methods = {"create": {"User": createMethods.createUser,
+                      "Bean": createMethods.createBean,
+                      "Farm": createMethods.createFarm,
+                      "Roastery": createMethods.createRoastery,
+                      "Process": createMethods.createProcess,
+
+                      },
            "fetch": {"user": fetchOnPK.fetchUserOnPK,
                      "bean": fetchOnPK.fetchBeanOnPK}
            }
 
-inp = ""
-while inp.lower() != "e":
-    inp = input("what do you want to do?" +
-                str(methods.keys())+" exit: (e)\n- ")
+while True:
+    inp = input("what do you want to do?: " +
+                str(list(methods.keys()))[1:-1]+", exit (e)\n- ")
+    if inp.lower() == "e":
+        break
 
     if inp not in methods:
         print(inp, "is not regonized try againt:\n")
@@ -19,10 +34,12 @@ while inp.lower() != "e":
 
     inp2 = ""
     while inp2 != "e":
-        inp2 = input("\nwhat do you want to "+inp+" :" +
-                     str(methods[inp].keys())+"\n- ")
+        inp2 = input("\nwhat do you want to "+inp+"? : " +
+                     str(list(methods[inp].keys()))[1:-1]+", exit (e)\n- ")
+        if inp2.lower() == "e":
+            break
         if inp2 not in methods[inp]:
             print(inp, "is not regonized try againt:\n")
             continue
-        methods[inp][inp2]()  # Den her er sylfrekk da
+        pp(methods[inp][inp2]())  # Den her er sylfrekk da
         break

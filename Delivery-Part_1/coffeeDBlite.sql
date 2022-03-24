@@ -78,7 +78,8 @@ CREATE TABLE Coffee(
 );
 
 CREATE TABLE User(
-    user_email TEXT PRIMARY KEY,
+    user_ID INTEGER PRIMARY KEY,
+    user_email TEXT UNIQUE,
     first_name TEXT,
     last_name TEXT,
     password TEXT

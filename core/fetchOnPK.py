@@ -1,27 +1,25 @@
 import sqlite3
-from ENV import DBname
+from core.ENV import DBname
 
 
 def fetchUserOnPK():
-    user_email = input("unique email (e): ")
-    if user_email == "e":
-        return
-
-    con = sqlite3.connect(DBname)
-    c = con.cursor()
-
-    c.execute("Select * from User where User.user_email == " +
-              user_email)  # OBS er dette dårlig tror ikke det går
-    print(c.fetchone())
-    con.commit()
-    con.close()
-
-
-"""
     try:
+        user_id = input("user ID (e): ")
+        if user_id == "e":
+            return
+
+        con = sqlite3.connect(DBname)
+        c = con.cursor()
+
+        c.execute("Select * from User where User.user_ID == " +
+                  user_id)  # OBS er dette dårlig tror ikke det går
+        res = c.fetchone()
+        con.commit()
+        con.close()
+        return [res]
     except Exception as e:
-        print(e)
-"""
+        print(e, " try again: \n")
+        fetchUserOnPK()
 
 
 def fetchBeanOnPK():
@@ -35,8 +33,10 @@ def fetchBeanOnPK():
 
         c.execute("Select * from Bean where Bean.bean_ID == " +
                   beanID)  # OBS er dette dårlig
-        print("\nBean \n", c.fetchone(), "\n")
+        res = c.fetchone()
         con.commit()
         con.close()
+        return [res]
     except Exception as e:
-        print(e)
+        print(e, " try again: \n")
+        fetchBeanOnPK()
