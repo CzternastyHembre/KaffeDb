@@ -20,9 +20,10 @@ def fetchAllFromQuery(query, vars):
 
 def userStoryOne():
     print("Simply to the following steps:")
-    print("- 1 First use the fetch command in the terminal to see if the exisiting rows exist")
-    print("- 2 Then create the rows that are needed")
-    print("- 3 Then create a Evaluation with the parameters")
+    print("- 1 Log in or create a user")
+    print("- 2 First use the fetch command in the terminal to see if the exisiting rows exist")
+    print("- 3 Then create the rows that are needed")
+    print("- 4 Then create a Evaluation with the parameters")
     print()
 
 
@@ -80,7 +81,7 @@ FROM Coffee
     INNER JOIN Farm on Farm.farm_ID == Batch.farm_ID
     NATURAL JOIN Process
     NATURAL JOIN Contains
-WHERE (Roastery.country=? OR Roastery.country=?OR Farm.country=?OR Farm.country=?) AND NOT ((description== ?) OR (process_name == ?) OR (coffee_description == ?))
+WHERE (Roastery.country=? OR Roastery.country=? OR Farm.country=? OR Farm.country=?) AND NOT ((description== ?) OR (process_name == ?) OR (coffee_description == ?))
 """, [countryOne, countryTwo]*2 + [descType] * 3)
     table.insert(0, ["Coffee name", "Roastery name"])
     pp(table)
