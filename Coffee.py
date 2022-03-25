@@ -27,6 +27,7 @@ methods = {"Create": {
     "Batch": createMethods.createBatch,
     "Bean": createMethods.createBean,
     "Coffee": createMethods.createCoffee,
+    "Contains": createMethods.createContains,
     "Evaluation": createMethods.createEvaluation,
     "Farm": createMethods.createFarm,
     "Process": createMethods.createProcess,
@@ -39,6 +40,7 @@ methods = {"Create": {
         "Batch": fetch.fetchTable,
         "Bean": fetch.fetchTable,
         "Coffee": fetch.fetchTable,
+        "Contains": fetch.fetchTable,
         "Evaluation": fetch.fetchTable,
         "Farm": fetch.fetchTable,
         "Process": fetch.fetchTable,
@@ -52,8 +54,8 @@ methods = {"Create": {
         "1": userStories.userStoryOne,
         "2": userStories.userStoryTwo,
         "3": userStories.userStoryTree,
-        "4": userStories.userStoryTwo,
-        "5": userStories.userStoryTwo,
+        "4": userStories.userStoryFour,
+        "5": userStories.userStoryFive,
 }
 
 }
@@ -134,6 +136,7 @@ def main():
     # Create methods
             print()
             if inp == "Create":
+                print("Creating " + inp2)
                 methods[inp][inp2](user)  # Den her er sylfrekk da
 
     # UserStories
@@ -142,6 +145,7 @@ def main():
 
     # Fetch methods
             if inp == "Fetch":
+                print("Fetching " + inp2)
                 if inp2 == "All":
                     for k, v in methods[inp].items():
                         v(k)

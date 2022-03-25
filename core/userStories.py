@@ -46,8 +46,8 @@ def userStoryTwo():
 
 def userStoryTree():
     table = fetchAllFromQuery("""SELECT avg(points) as avg_points,kg_price_kr, coffee_name, roastery_name
-FROM Evaluation 
-    NATURAL JOIN Coffee 
+FROM Evaluation
+    NATURAL JOIN Coffee
     NATURAL JOIN Roastery
 GROUP BY Coffee.coffee_ID
 ORDER BY avg_points / kg_price_kr DESC;""", [])
@@ -57,16 +57,31 @@ ORDER BY avg_points / kg_price_kr DESC;""", [])
 
 
 def userStoryFour():
-    pass
+    anyFloral = "%floral%"
+    table = fetchAllFromQuery("""SELECT coffee_name, roastery_name
+FROM Coffee
+    NATURAL JOIN Roastery
+    NATURAL JOIN Evaluation
+WHERE user_notes LIKE ?
+""", [anyFloral])
+    table.insert(0, ["Coffee name", "Roastery name"])
+    pp(table)
+    print()
 
 
 def userStoryFive():
-    anyFloral = "%floral%"
-    table = fetchAllFromQuery("""SELECT coffee_name, roastery_name 
-FROM Coffee 
-    NATURAL JOIN Roastery 
-    NATURAL JOIN Evaluation 
-WHERE user_notes LIKE ?
-""", [anyFloral])
+    countryOne = "Rwanda"
+    countryTwo = "Colombia"
+    descType = "washed"
+    table = fetchAllFromQuery("""SELECT coffee_name, roastery_name
+FROM Coffee
+    NATURAL JOIN Batch
+    NATURAL JOIN Roastery
+    INNER JOIN Farm on Farm.farm_ID == Batch.farm_ID
+    NATURAL JOIN Process
+    NATURAL JOIN Contains
+WHERE (Roastery.country=? OR Roastery.country=?OR Farm.country=?OR Farm.country=?) AND NOT ((description== ?) OR (process_name == ?) OR (coffee_description == ?))
+""", [countryOne, countryTwo]*2 + [descType] * 3)
+    table.insert(0, ["Coffee name", "Roastery name"])
     pp(table)
     print()

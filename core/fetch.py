@@ -10,7 +10,11 @@ from ENV import color
 
 def fetchTable(tableName):
     table = fetchAllFromQuery("SELECT * FROM " + tableName, [])
-    table.insert(0, ["ID"] + AllValues[tableName])
+    if not tableName == "Contains":
+        table.insert(0, ["ID"] + AllValues[tableName])
+    else:
+        table.insert(0, AllValues[tableName])
+
     print(color.YELLOW + color.UNDERLINE + tableName + color.END)
     pp(table)
     print()
