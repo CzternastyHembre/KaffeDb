@@ -1,5 +1,6 @@
 import sqlite3
 from ENV import DBname
+from ENV import color
 
 AllBeanValues = ["bean_name", "species"]
 AllFarmValues = ["farm_name", "country", "region", "height"]
@@ -17,10 +18,18 @@ AllEvaluationValues = ["coffee_ID", "user_ID",
                        "points", "evalutation_date", "user_notes"]
 
 
+def ppinp(s):
+    print(color.GREEN + s + color.END)
+    res = input(color.CYAN + "- ")
+    print(color.END, end="")
+    return res
+
+
 def pp(l):
     isHeader = True
     m = [max(len(str(l[j][i])) for j in range(len(l)))
          for i in range(len(l[0]))]
+    print(color.BOLD, end="")
     for line in l:
         print("| ", end="")
         ls = 1
@@ -34,7 +43,9 @@ def pp(l):
             ls += len(streng + " | ")
             print(streng, end=" | ")
         if isHeader:
+
             print("\n" + "-"*ls, end="")
+            print(color.END, end="")
             isHeader = False
         print()
 
@@ -55,11 +66,12 @@ def getIdFromList(tableName, header):
         tempHeader = ["ID"] + header
         table.insert(0, tempHeader)
     print()
-    print(tableName)
+    print(color.YELLOW + color.UNDERLINE + tableName + color.END)
     pp(table)
 
-    res = input("\nChoose a id for "+tableName+", exit(e):\n- ")
+    res = ppinp("Choose a id for "+tableName+", exit (e)")
     if res.lower() == "e":
+        print()
         return False
     if res not in idList:
         print("\nNot a valid ID: try again")
@@ -69,10 +81,11 @@ def getIdFromList(tableName, header):
 
 def createTable(tableName, setValues, allValues):
     try:
-        tableValues = [input(str(value) + ": ")
+        tableValues = [ppinp(str(value) + ": ")
                        for value in allValues[len(setValues):]]
         for el in tableValues:
             if el.lower() == "e":
+                print()
                 return
         tableValues = setValues + tableValues
 
