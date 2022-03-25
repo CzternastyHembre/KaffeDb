@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from ENV import DBname
+from ENV import AllValues, DBname
 from ENV import color
 from core.createMethods import pp
 import datetime
@@ -45,5 +45,28 @@ def userStoryTwo():
 
 
 def userStoryTree():
-    table = fetchAllFromQuery("""
-    """)
+    table = fetchAllFromQuery("""SELECT avg(points) as avg_points,kg_price_kr, coffee_name, roastery_name
+FROM Evaluation 
+    NATURAL JOIN Coffee 
+    NATURAL JOIN Roastery
+GROUP BY Coffee.coffee_ID
+ORDER BY avg_points / kg_price_kr DESC;""", [])
+    table.insert(0, ["avg points", "kg price", "coffee name", "roastery name"])
+    pp(table)
+    print()
+
+
+def userStoryFour():
+    pass
+
+
+def userStoryFive():
+    anyFloral = "%floral%"
+    table = fetchAllFromQuery("""SELECT coffee_name, roastery_name 
+FROM Coffee 
+    NATURAL JOIN Roastery 
+    NATURAL JOIN Evaluation 
+WHERE user_notes LIKE ?
+""", [anyFloral])
+    pp(table)
+    print()
