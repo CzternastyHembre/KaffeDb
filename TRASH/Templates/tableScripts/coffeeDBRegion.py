@@ -1,6 +1,6 @@
 import sqlite3
-from core.ENV import DBname
-tableName = "Country"
+from ENV import DBname
+tableName = "Region"
 
 
 def createDB():
@@ -8,16 +8,17 @@ def createDB():
 
     c = con.cursor()
     # Create a table
-    c.execute("Drop table " + tableName)
+    #c.execute("Drop table " + tableName)
     c.execute("CREATE TABLE "+tableName + " (\
-        name TEXT PRIMARY KEY\
-        CONSTRAINT Country_PK PRIMARY KEY (Pnr)); \
-            );")
+        Name TEXT PRIMARY KEY\
+        CountryName TEXT\
+        FOREIGN KEY(CountryName) REFERENCES Country(name)\
+        )")
     con.commit()
     con.close()
 
 
-def addCountry(name):
+def addRegion(name):
     con = sqlite3.connect(DBname)
     c = con.cursor()
     c.execute("Insert into " + tableName + " Values (?)", ([name]))
@@ -25,11 +26,11 @@ def addCountry(name):
     con.close()
 
 
-def addCountries():
+def addRegions():
     countries = [
-        "Norway",
-        "Colombia",
-        "Sweeden"
+        ["Stavanger", "Norway"],
+        ["Botogá", "Colombia"],
+        ["Stockholm", "Sweeden"]
     ]
     for c in countries:
-        addCountry(c)
+        addRegions(c)

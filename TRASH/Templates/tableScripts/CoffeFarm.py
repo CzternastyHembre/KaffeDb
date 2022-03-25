@@ -1,5 +1,5 @@
 import sqlite3
-from core.ENV import DBname
+from ENV import DBname
 tableName = "CoffeeFarm"
 
 

@@ -1,5 +1,5 @@
 import sqlite3
-from core.ENV import DBname
+from ENV import DBname
 
 # con = sqlite3.connect(':memory:') lagres kun i minne
 

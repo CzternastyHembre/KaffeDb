@@ -1,4 +1,4 @@
-import core.createMethods as createMethods
+import createMethods as createMethods
 import core.fetchOnPK as fetchOnPK
 
 
@@ -11,16 +11,20 @@ def pp(s):
     print()
 
 
-methods = {"create": {"User": createMethods.createUser,
-                      "Bean": createMethods.createBean,
-                      "Farm": createMethods.createFarm,
-                      "Roastery": createMethods.createRoastery,
-                      "Process": createMethods.createProcess,
-
-                      },
-           "fetch": {"user": fetchOnPK.fetchUserOnPK,
-                     "bean": fetchOnPK.fetchBeanOnPK}
-           }
+methods = {"create": {
+    "Batch": createMethods.createBatch,
+    "Bean": createMethods.createBean,
+    "Coffee": createMethods.createCoffee,
+    "Evaluation": createMethods.createEvaluation,
+    "Farm": createMethods.createFarm,
+    "Process": createMethods.createProcess,
+    "Produses_Bean": createMethods.createProduses_Bean,
+    "Roastery": createMethods.createRoastery,
+    "User": createMethods.createUser,
+},
+    "fetch": {"user": fetchOnPK.fetchUserOnPK,
+              "bean": fetchOnPK.fetchBeanOnPK}
+}
 
 while True:
     inp = input("what do you want to do?: " +
@@ -41,5 +45,5 @@ while True:
         if inp2 not in methods[inp]:
             print(inp, "is not regonized try againt:\n")
             continue
-        pp(methods[inp][inp2]())  # Den her er sylfrekk da
+        methods[inp][inp2]()  # Den her er sylfrekk da
         break
