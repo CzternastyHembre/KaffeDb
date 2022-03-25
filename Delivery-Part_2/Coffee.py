@@ -1,4 +1,3 @@
-from re import I
 import core.createMethods as createMethods
 import core.loginMethods as loginMethods
 import core.userStories as userStories
@@ -6,24 +5,16 @@ import core.fetch as fetch
 from ENV import color
 
 
-def pp(s):
-    print()
-    for line in s:
-        for el in line:
-            print(el, end=" | ")
-        print()
-    print()
-
-
-def errorp(s):
+def errorp(s):  # Print for errormessage
     print(color.RED + "\n", s, "is not regonized try again:" + color.END)
 
 
+# Emptyfuntion for the dictionary methods["Fetch"]["All"] so calling it doesn't do anything
 def emptyFunc(empptyString):
     pass
 
 
-methods = {"Create": {
+methods = {"Create": {  # Dictionary that has functions to run
     "Batch": createMethods.createBatch,
     "Bean": createMethods.createBean,
     "Coffee": createMethods.createCoffee,
@@ -67,7 +58,7 @@ queryString = {
 }
 
 
-def ppIntro():
+def ppIntro():  # Pretty print when starting the app
     print("\n" + color.BLUE + color.BOLD +
           "Welcome to the coffee database:" + color.END)
     print(color.GREEN + "I this script you are able to insert insert rows in the different tables")
@@ -78,7 +69,7 @@ def ppIntro():
           "PS: All the dates is formated 'DD-MM-YYYY', but there is not any validation for that\n" + color.END)
 
 
-def ppinp(s, l):
+def ppinp(s, l):  # Pritty print for input
     print(color.GREEN + s + color.END)
     print(ppList(l))
     res = input(color.CYAN + "- ")
@@ -86,11 +77,11 @@ def ppinp(s, l):
     return res
 
 
-def ppList(l):
+def ppList(l):  # Pretty print function for the meny choices
     return " |".join([" " + color.BLUE + str(val) + color.END for val in l]) + " "
 
 
-def completeInput(inp, values):
+def completeInput(inp, values):  # Autocomplete for input
     temp = [val for val in values if val[:len(inp)].lower() == inp.lower()]
     if len(temp):
         inp = temp[0]
@@ -100,6 +91,7 @@ def completeInput(inp, values):
 def main():
     user_id = 0
     ppIntro()
+
     while True:
         inp = ppinp("what do you want to do?:",
                     list(methods.keys()) + ["Exit (e)"]
@@ -108,9 +100,11 @@ def main():
             break
 
         inp = completeInput(inp, methods.keys())
+
         if inp not in methods:
             errorp(inp)
             continue
+
         print()
 
     # Login method

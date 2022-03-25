@@ -5,14 +5,14 @@ from ENV import color
 from ENV import AllValues
 
 
-def ppinp(s):
+def ppinp(s):  # Pritty print for input
     print(color.GREEN + s + color.END)
     res = input(color.CYAN + "- ")
     print(color.END, end="")
     return res
 
 
-def pp(l):
+def pp(l):  # Pritty print for the tables
     isHeader = True
     m = [max(len(str(l[j][i])) for j in range(len(l)))
          for i in range(len(l[0]))]
@@ -37,6 +37,7 @@ def pp(l):
         print()
 
 
+# Gets the id from the list and displaying the choices
 def getIdFromList(tableName, header):
     con = sqlite3.connect(DBname)
     c = con.cursor()
@@ -65,6 +66,7 @@ def getIdFromList(tableName, header):
     return res
 
 
+# Default function for inserting in the tables
 def createTable(tableName, setValues, allValues):
     try:
         tableValues = [ppinp(str(value) + ": exit (e)")

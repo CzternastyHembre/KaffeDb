@@ -8,7 +8,7 @@ from ENV import AllValues
 from ENV import color
 
 
-def fetchTable(tableName):
+def fetchTable(tableName):  # Function that prints the table based on the tablename
     table = fetchAllFromQuery("SELECT * FROM " + tableName, [])
     if tableName == "Contains" or tableName == "Produses_Bean":
         table.insert(0, AllValues[tableName])

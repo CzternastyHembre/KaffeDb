@@ -6,7 +6,7 @@ from core.createMethods import pp
 import datetime
 
 
-def fetchAllFromQuery(query, vars):
+def fetchAllFromQuery(query, vars):  # Fetching the table based on input
     con = sqlite3.connect(DBname)
     c = con.cursor()
 

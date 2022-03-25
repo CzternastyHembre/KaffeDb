@@ -1,3 +1,5 @@
+# "Evnirement veriables"
+
 DBname = "Coffee.db"
 
 

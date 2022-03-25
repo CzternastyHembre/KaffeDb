@@ -4,7 +4,7 @@ from core.createMethods import ppinp
 from ENV import color
 
 
-def login():
+def login():  # Login method
     user_email = ppinp("Write in user email, exit (e)")
 
     if user_email.lower() == "e":
@@ -31,7 +31,7 @@ def login():
     return user[0][0]
 
 
-def passWord(pw):
+def passWord(pw):  # Inputing correct password
     inp = ppinp("Password exit(e):")
     if inp.lower() == "e":
         return False
