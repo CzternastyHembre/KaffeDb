@@ -1,9 +1,11 @@
 import sqlite3
 from ENV import DBname
+from core.createMethods import ppinp
+from ENV import color
 
 
 def login():
-    user_email = input("Write in user email, exit (e):\n- ")
+    user_email = ppinp("Write in user email, exit (e)")
 
     if user_email.lower() == "e":
         return
@@ -19,7 +21,7 @@ def login():
 
     user = [val for val in users if val[1] == user_email]
     if not user:
-        print("\nNo email "+user_email+": try again\n")
+        print(color.RED + "\nNo email "+user_email+": try again\n" + color.END)
         return login()
 
     if not passWord(user[0][-1]):
@@ -30,10 +32,10 @@ def login():
 
 
 def passWord(pw):
-    inp = input("Password exit(e): \n- ")
+    inp = ppinp("Password exit(e):")
     if inp.lower() == "e":
         return False
     if inp == pw:
         return True
-    print("wrong password, try again: \n")
+    print(color.RED + "wrong password, try again: \n" + color.END)
     return passWord(pw)

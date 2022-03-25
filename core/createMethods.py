@@ -67,7 +67,7 @@ def getIdFromList(tableName, header):
 
 def createTable(tableName, setValues, allValues):
     try:
-        tableValues = [ppinp(str(value) + ": ")
+        tableValues = [ppinp(str(value) + ": exit (e)")
                        for value in allValues[len(setValues):]]
         for el in tableValues:
             if el.lower() == "e":
@@ -159,7 +159,7 @@ def createProduses_Bean(user_ID=0):
 
 def createEvaluation(user_ID=0):
     if not user_ID:
-        print("You need to log in og create a user to evaluate coffee\n")
+        print(color.RED + "You need to log in og create a user to evaluate coffee\n" + color.END)
         return
     coffee_ID = getIdFromList("Coffee", AllValues["Coffee"])
     if not coffee_ID:

@@ -62,8 +62,8 @@ def userStoryFour():
 FROM Coffee
     NATURAL JOIN Roastery
     NATURAL JOIN Evaluation
-WHERE user_notes LIKE ?
-""", [anyFloral])
+WHERE (Evaluation.user_notes LIKE ? OR Coffee.coffee_description LIKE ?)
+""", [anyFloral] * 2)
     table.insert(0, ["Coffee name", "Roastery name"])
     pp(table)
     print()

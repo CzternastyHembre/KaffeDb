@@ -16,7 +16,7 @@ def pp(s):
 
 
 def errorp(s):
-    print("\n", s, "is not regonized try againt:")
+    print(color.RED + "\n", s, "is not regonized try again:" + color.END)
 
 
 def emptyFunc(empptyString):
@@ -98,7 +98,7 @@ def completeInput(inp, values):
 
 
 def main():
-    user = 1
+    user_id = 0
     ppIntro()
     while True:
         inp = ppinp("what do you want to do?:",
@@ -115,7 +115,7 @@ def main():
 
     # Login method
         if inp == "Login":
-            user = methods[inp]()
+            user_id = methods[inp]()
             print()
             continue
 
@@ -137,7 +137,7 @@ def main():
             print()
             if inp == "Create":
                 print("Creating " + inp2)
-                methods[inp][inp2](user)  # Den her er sylfrekk da
+                methods[inp][inp2](user_id)  # Den her er sylfrekk da
 
     # UserStories
             if inp == "UserStories":
