@@ -73,7 +73,7 @@ WHERE (Evaluation.user_notes LIKE ? OR Coffee.coffee_description LIKE ?)
 def userStoryFive():
     countryOne = "Rwanda"
     countryTwo = "Colombia"
-    descType = "washed"
+    descType = "%washed%"
     table = fetchAllFromQuery("""SELECT coffee_name, roastery_name
 FROM Coffee
     NATURAL JOIN Batch
