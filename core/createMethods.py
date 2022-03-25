@@ -1,6 +1,4 @@
 import sqlite3
-
-from numpy import true_divide, vsplit
 from ENV import DBname
 
 AllBeanValues = ["bean_name", "species"]
@@ -15,7 +13,7 @@ AllCoffeeValues = ["batch_ID", "roastery_ID", "coffee_name",
                    "roast_degree", "kg_price_kr", "coffee_description", "roast_date"]
 AllContainsValues = ["bean_ID", "batch_ID"]
 AllProduses_BeanValues = ["bean_ID", "farm_ID"]
-AllEvaluationValues = ["coffee_ID", "user_email",
+AllEvaluationValues = ["coffee_ID", "user_ID",
                        "points", "evalutation_date", "user_notes"]
 
 
@@ -28,9 +26,13 @@ def pp(l):
         ls = 1
         for i in range(len(line)):
             el = line[i]
-            mm = m[i]
-            ls += len(str(el).ljust(mm) + " | ")
-            print(str(el).ljust(mm), end=" | ")
+            maxLen = 15
+            streng = str(el)
+
+            streng = streng.ljust(
+                m[i]) if m[i] < maxLen else streng[0:maxLen].ljust(maxLen)
+            ls += len(streng + " | ")
+            print(streng, end=" | ")
         if isHeader:
             print("\n" + "-"*ls, end="")
             isHeader = False
@@ -61,7 +63,7 @@ def getIdFromList(tableName, header):
         return False
     if res not in idList:
         print("\nNot a valid ID: try again")
-        getIdFromList(tableName, header)
+        return getIdFromList(tableName, header)
     return res
 
 
@@ -86,30 +88,30 @@ def createTable(tableName, setValues, allValues):
 
     except Exception as e:
         print(e, "try again\n")
-        createTable(tableName, setValues, allValues)
+        return createTable(tableName, setValues, allValues)
 
 
-def createUser():
+def createUser(user_ID=0):
     createTable("User", [], AllUserValues)
 
 
-def createBean():
+def createBean(user_ID=0):
     createTable("Bean", [], AllBeanValues)
 
 
-def createFarm():
+def createFarm(user_ID=0):
     createTable("Farm", [], AllFarmValues)
 
 
-def createRoastery():
+def createRoastery(user_ID=0):
     createTable("Roastery", [], AllRoasteryValues)
 
 
-def createProcess():
+def createProcess(user_ID=0):
     createTable("Process", [], AllProcessValues)
 
 
-def createBatch():
+def createBatch(user_ID=0):
     farm_ID = getIdFromList("Farm", AllFarmValues)
     if not farm_ID:
         return
@@ -122,17 +124,17 @@ def createBatch():
     createTable("Batch", [farm_ID, bean_ID, process_ID], AllBatchValues)
 
 
-def createCoffee():
+def createCoffee(user_ID=0):
     batch_ID = getIdFromList("Batch", AllBatchValues)
     if not batch_ID:
         return
     roastery_ID = getIdFromList("Roastery", AllRoasteryValues)
     if not roastery_ID:
         return
-    createTable("Batch", [batch_ID, roastery_ID], AllCoffeeValues)
+    createTable("Coffee", [batch_ID, roastery_ID], AllCoffeeValues)
 
 
-def createContains():
+def createContains(user_ID=0):
     bean_ID = getIdFromList("Bean", AllBeanValues)
     if not bean_ID:
         return
@@ -142,7 +144,7 @@ def createContains():
     createTable("Contains", [bean_ID, batch_ID], AllContainsValues)
 
 
-def createProduses_Bean():
+def createProduses_Bean(user_ID=0):
     bean_ID = getIdFromList("Bean", AllBeanValues)
     if not bean_ID:
         return
@@ -152,8 +154,11 @@ def createProduses_Bean():
     createTable("Produses_Bean", [bean_ID, farm_ID], AllProduses_BeanValues)
 
 
-def createEvaluation():
+def createEvaluation(user_ID=0):
+    if not user_ID:
+        print("You need to log in og create a user to evaluate coffee\n")
+        return
     coffee_ID = getIdFromList("Coffee", AllCoffeeValues)
     if not coffee_ID:
         return
-    createTable("Evaluation", [coffee_ID], AllEvaluationValues)
+    createTable("Evaluation", [user_ID, coffee_ID], AllEvaluationValues)
