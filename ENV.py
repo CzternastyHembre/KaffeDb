@@ -15,16 +15,16 @@ class color:
 
 
 AllValues = {
-    "AllBeanValues": ["bean_name", "species"],
-    "AllFarmValues": ["farm_name", "country", "region", "height"],
-    "AllRoasteryValues": ["roastery_name", "region", "country"],
-    "AllProcessValues": ["process_name", "description"],
-    "AllUserValues": ["user_email", "first_name", "last_name", "password"],
-    "AllBatchValues": ["farm_ID", "bean_ID", "process_ID", "harvestYear", "kg_price_usd"],
-    "AllCoffeeValues": ["batch_ID", "roastery_ID", "coffee_name", "roast_degree", "kg_price_kr", "coffee_description", "roast_date"],
-    "AllContainsValues": ["bean_ID", "batch_ID"],
-    "AllProduses_BeanValues": ["bean_ID", "farm_ID"],
-    "AllEvaluationValues": ["coffee_ID", "user_ID",
-                            "points", "evalutation_date", "user_notes"]
+    "Bean": ["bean_name", "species"],
+    "Farm": ["farm_name", "country", "region", "height"],
+    "Roastery": ["roastery_name", "region", "country"],
+    "Process": ["process_name", "description"],
+    "User": ["user_email", "first_name", "last_name", "password"],
+    "Batch": ["farm_ID", "bean_ID", "process_ID", "harvestYear", "kg_price_usd"],
+    "Coffee": ["batch_ID", "roastery_ID", "coffee_name", "roast_degree", "kg_price_kr", "coffee_description", "roast_date"],
+    "Contains": ["bean_ID", "batch_ID"],
+    "Produses_Bean": ["bean_ID", "farm_ID"],
+    "Evaluation": ["coffee_ID", "user_ID",
+                   "points", "evalutation_date", "user_notes"]
 
 }

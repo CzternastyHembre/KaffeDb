@@ -52,7 +52,6 @@ def getIdFromList(tableName, header):
     if len(header) > 0:
         tempHeader = ["ID"] + header
         table.insert(0, tempHeader)
-    print()
     print(color.YELLOW + color.UNDERLINE + tableName + color.END)
     pp(table)
 
@@ -92,78 +91,78 @@ def createTable(tableName, setValues, allValues):
 
 
 def createUser(user_ID=0):
-    createTable("User", [], AllValues["AllUserValues"])
+    createTable("User", [], AllValues["User"])
 
 
 def createBean(user_ID=0):
-    createTable("Bean", [], AllValues["AllBeanValues"])
+    createTable("Bean", [], AllValues["Bean"])
 
 
 def createFarm(user_ID=0):
-    createTable("Farm", [], AllValues["AllFarmValues"])
+    createTable("Farm", [], AllValues["Farm"])
 
 
 def createRoastery(user_ID=0):
-    createTable("Roastery", [], AllValues["AllRoasteryValues"])
+    createTable("Roastery", [], AllValues["Roastery"])
 
 
 def createProcess(user_ID=0):
-    createTable("Process", [], AllValues["AllProcessValues"])
+    createTable("Process", [], AllValues["Process"])
 
 
 def createBatch(user_ID=0):
-    farm_ID = getIdFromList("Farm", AllValues["AllFarmValues"])
+    farm_ID = getIdFromList("Farm", AllValues["Farm"])
     if not farm_ID:
         return
-    bean_ID = getIdFromList("Bean", AllValues["AllBeanValues"])
+    bean_ID = getIdFromList("Bean", AllValues["Bean"])
     if not bean_ID:
         return
-    process_ID = getIdFromList("Process", AllValues["AllProcessValues"])
+    process_ID = getIdFromList("Process", AllValues["Process"])
     if not process_ID:
         return
     createTable("Batch", [farm_ID, bean_ID, process_ID],
-                AllValues["AllBatchValues"])
+                AllValues["Batch"])
 
 
 def createCoffee(user_ID=0):
-    batch_ID = getIdFromList("Batch", AllValues["AllBatchValues"])
+    batch_ID = getIdFromList("Batch", AllValues["Batch"])
     if not batch_ID:
         return
-    roastery_ID = getIdFromList("Roastery", AllValues["AllRoasteryValues"])
+    roastery_ID = getIdFromList("Roastery", AllValues["Roastery"])
     if not roastery_ID:
         return
     createTable("Coffee", [batch_ID, roastery_ID],
-                AllValues["AllCoffeeValues"])
+                AllValues["Coffee"])
 
 
 def createContains(user_ID=0):
-    bean_ID = getIdFromList("Bean", AllValues["AllBeanValues"])
+    bean_ID = getIdFromList("Bean", AllValues["Bean"])
     if not bean_ID:
         return
-    batch_ID = getIdFromList("Batch", AllValues["AllBatchValues"])
+    batch_ID = getIdFromList("Batch", AllValues["Batch"])
     if not batch_ID:
         return
     createTable("Contains", [bean_ID, batch_ID],
-                AllValues["AllContainsValues"])
+                AllValues["Contains"])
 
 
 def createProduses_Bean(user_ID=0):
-    bean_ID = getIdFromList("Bean", AllValues["AllBeanValues"])
+    bean_ID = getIdFromList("Bean", AllValues["Bean"])
     if not bean_ID:
         return
-    farm_ID = getIdFromList("Farm", AllValues["AllFarmValues"])
+    farm_ID = getIdFromList("Farm", AllValues["Farm"])
     if not farm_ID:
         return
     createTable("Produses_Bean", [bean_ID, farm_ID],
-                AllValues["AllProduses_BeanValues"])
+                AllValues["Produses_Bean"])
 
 
 def createEvaluation(user_ID=0):
     if not user_ID:
         print("You need to log in og create a user to evaluate coffee\n")
         return
-    coffee_ID = getIdFromList("Coffee", AllValues["AllCoffeeValues"])
+    coffee_ID = getIdFromList("Coffee", AllValues["Coffee"])
     if not coffee_ID:
         return
     createTable("Evaluation", [coffee_ID, user_ID],
-                AllValues["AllEvaluationValues"])
+                AllValues["Evaluation"])

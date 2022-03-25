@@ -19,10 +19,10 @@ def fetchAllFromQuery(query, vars):
 
 
 def userStoryOne():
-    print()
     print("Simply to the following steps:")
-    print("First create the corresponding rows in the table that doesn't exist")
-    print("Then create a Evaluationw with the parameters")
+    print("- 1 First use the fetch command in the terminal to see if the exisiting rows exist")
+    print("- 2 Then create the rows that are needed")
+    print("- 3 Then create a Evaluation with the parameters")
     print()
 
 
@@ -39,7 +39,7 @@ def userStoryTwo():
 
     table = [(val[2], val[0] + " " + val[1]) for val in table]
     table.insert(0, ["Taste types", "Full name"])
-    print()
+    print(color.YELLOW + color.UNDERLINE + "Userstory 2" + color.END)
     pp(table)
     print()
 

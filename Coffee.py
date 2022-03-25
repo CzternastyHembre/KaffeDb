@@ -19,6 +19,10 @@ def errorp(s):
     print("\n", s, "is not regonized try againt:")
 
 
+def emptyFunc(empptyString):
+    pass
+
+
 methods = {"Create": {
     "Batch": createMethods.createBatch,
     "Bean": createMethods.createBean,
@@ -31,8 +35,16 @@ methods = {"Create": {
     "User": createMethods.createUser,
 },
     "Fetch": {
-        "user": fetch.fetchUserOnPK,
-        "bean": fetch.fetchBeanOnPK
+        "All": emptyFunc,
+        "Batch": fetch.fetchTable,
+        "Bean": fetch.fetchTable,
+        "Coffee": fetch.fetchTable,
+        "Evaluation": fetch.fetchTable,
+        "Farm": fetch.fetchTable,
+        "Process": fetch.fetchTable,
+        "Produses_Bean": fetch.fetchTable,
+        "Roastery": fetch.fetchTable,
+        "User": fetch.fetchTable,
 },
     "Login": loginMethods.login,
 
@@ -43,6 +55,12 @@ methods = {"Create": {
         "4": userStories.userStoryTwo,
         "5": userStories.userStoryTwo,
 }
+
+}
+queryString = {
+    "Create": "what do you want to create?",
+    "Fetch": "what do you want to fetch?",
+    "UserStories": "what do userstory do you want?",
 
 }
 
@@ -91,14 +109,17 @@ def main():
         if inp not in methods:
             errorp(inp)
             continue
+        print()
+
     # Login method
         if inp == "Login":
             user = methods[inp]()
+            print()
             continue
 
         inp2 = ""
         while True:
-            inp2 = ppinp("what do you want to "+inp+"?",
+            inp2 = ppinp(queryString[inp],
                          list(methods[inp].keys()) + ["Exit (e)"])
             if inp2.lower() == "e":
                 print()
@@ -111,16 +132,21 @@ def main():
                 continue
 
     # Create methods
+            print()
             if inp == "Create":
-
                 methods[inp][inp2](user)  # Den her er sylfrekk da
 
     # UserStories
             if inp == "UserStories":
                 methods[inp][inp2]()
-                break
 
     # Fetch methods
+            if inp == "Fetch":
+                if inp2 == "All":
+                    for k, v in methods[inp].items():
+                        v(k)
+                else:
+                    methods[inp][inp2](inp2)
 
 
 main()
