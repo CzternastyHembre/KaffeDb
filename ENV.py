@@ -12,3 +12,19 @@ class color:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     END = '\033[0m'
+
+
+AllValues = {
+    "AllBeanValues": ["bean_name", "species"],
+    "AllFarmValues": ["farm_name", "country", "region", "height"],
+    "AllRoasteryValues": ["roastery_name", "region", "country"],
+    "AllProcessValues": ["process_name", "description"],
+    "AllUserValues": ["user_email", "first_name", "last_name", "password"],
+    "AllBatchValues": ["farm_ID", "bean_ID", "process_ID", "harvestYear", "kg_price_usd"],
+    "AllCoffeeValues": ["batch_ID", "roastery_ID", "coffee_name", "roast_degree", "kg_price_kr", "coffee_description", "roast_date"],
+    "AllContainsValues": ["bean_ID", "batch_ID"],
+    "AllProduses_BeanValues": ["bean_ID", "farm_ID"],
+    "AllEvaluationValues": ["coffee_ID", "user_ID",
+                            "points", "evalutation_date", "user_notes"]
+
+}

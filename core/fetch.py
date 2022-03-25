@@ -1,6 +1,15 @@
 import sqlite3
 from ENV import DBname
 
+from core.createMethods import pp
+
+from core.userStories import fetchAllFromQuery
+
+
+def fetchTable(tableName):
+    table = fetchAllFromQuery("SELECLT * FROM " + tableName)
+    pass
+
 
 def fetchUserOnPK():
     try:

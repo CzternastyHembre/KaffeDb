@@ -1,6 +1,8 @@
+from re import I
 import core.createMethods as createMethods
-import core.fetchOnPK as fetchOnPK
 import core.loginMethods as loginMethods
+import core.userStories as userStories
+import core.fetch as fetch
 from ENV import color
 
 
@@ -29,17 +31,17 @@ methods = {"Create": {
     "User": createMethods.createUser,
 },
     "Fetch": {
-        "user": fetchOnPK.fetchUserOnPK,
-        "bean": fetchOnPK.fetchBeanOnPK
+        "user": fetch.fetchUserOnPK,
+        "bean": fetch.fetchBeanOnPK
 },
     "Login": loginMethods.login,
 
     "UserStories": {
-        "1": "TISS",
-        "2": "TISS",
-        "3": "TISS",
-        "4": "TISS",
-        "5": "TISS",
+        "1": userStories.userStoryOne,
+        "2": userStories.userStoryTwo,
+        "3": userStories.userStoryTree,
+        "4": userStories.userStoryTwo,
+        "5": userStories.userStoryTwo,
 }
 
 }
@@ -51,7 +53,9 @@ def ppIntro():
     print(color.GREEN + "I this script you are able to insert insert rows in the different tables")
     print("To view the userstories, simply write :'UserStories'" + color.END)
     print(color.DARKCYAN +
-          "Tips: You only need to input the first characters to choose category\n" + color.END)
+          "Tips: You only need to input the first characters to choose category" + color.END)
+    print(color.PURPLE +
+          "PS: All the dates is formated 'DD-MM-YYYY', but there is not any validation for that\n" + color.END)
 
 
 def ppinp(s, l):
@@ -110,6 +114,11 @@ def main():
             if inp == "Create":
 
                 methods[inp][inp2](user)  # Den her er sylfrekk da
+
+    # UserStories
+            if inp == "UserStories":
+                methods[inp][inp2]()
+                break
 
     # Fetch methods
 
